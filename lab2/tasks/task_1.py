@@ -8,9 +8,9 @@ import math as m
 # Function-1-1: 1/(sin(1/x)+4)
 # Condition-1: x < 4
 # Function-2: 1/(x**2 + ln(x))
-# Умова-2: 4 <= x < 5
-# Ф-ція-3: tg((x-3)**3)
-# Умова-3: x >= 5
+# Condition-2: 4 <= x < 5
+# Function-3: tg((x-3)**3)
+# Condition-3: x >= 5
 
 step = 0.3
 
