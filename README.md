@@ -1,3 +1,3 @@
-# Лабораторні роботи з дисципліни "Алгоритмізація та програмування"
+# Laboratory works on "Algorithmisation and programming"
 ---
-## Виконав Скакун Дем'ян(ІР-14)
+## Done by Skakun Demian (ІР(IoT)-14)
