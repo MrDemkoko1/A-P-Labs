@@ -8,3 +8,4 @@
 ### II.
 1. Count the sum in given precision
 2. Tabulate the function changing x in given range with given step
+3. Draw a block diagram for the algorithm
