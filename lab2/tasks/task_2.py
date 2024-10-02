@@ -5,7 +5,7 @@
 start_x = 0.5                                   # Start value for x
 end_x = 0.9                                     # End value for x
 step = 0.05                                     # Step of x's change
-prec = 0.001                                    # Precision to which we tabulate the function
+prec = 0.001                                    # Precision to which we count sum
 
 def count_sum():                                # Creating a func that gonna count sum in given prec
     addend = 1                                  # Initialising addend var, 1 value is just for init
