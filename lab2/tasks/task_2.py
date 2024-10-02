@@ -14,11 +14,10 @@ def count_sum():                                # Creating a func that gonna cou
 
     while addend >= prec:                       # Loop until the addend is less than prec
         numerator = 1                           # Initialising numerator var
+        denominator = 1                         # Initialising denominator var
+        
         for i in range(1, n + 1):               # Calculate (1 * 3 * 5 * ... * (2n - 1))
             numerator *= 2 * i - 1              # Multiply the current odd term
-
-        denominator = 1                         # Initialising denominator var
-        for i in range(1, n + 1):               # Calculate (2 * 4 * 6 * ... * (2n))
             denominator *= 2 * i                # Multiply the current even term
         denominator *= 2 * n + 1                # Multiply by (2n + 1) for the complete denominator
 
