@@ -1,3 +1,4 @@
-# Laboratory works on "Algorithmisation and programming"
+## Laboratory work №4 (Variant 21)
 ---
-## Done by Skakun Demian (ІР(IoT)-14)
+### I.
+1. Create a program that will output third biggest number from a given array(set/tuple/list)
