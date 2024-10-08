@@ -1,5 +1,5 @@
 example_set = {3, 1, -32, 5, 11, -4, 10, 9}
-example_list = [5, 18, -3, -2, 12, 8]
+example_list = [5, 18, -3, -2, 12, 6, 5, 8]
 example_tuple = (1, -3)
 
 
