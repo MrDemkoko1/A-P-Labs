@@ -1,10 +1,19 @@
 class Farm:
-    def __init__(self,loc, anim, vent_pow):
-        self.location = loc
-        self.animals_count = anim
-        self.vent_power = vent_pow
 
+    def __init__(self, location, animals_qty, vent_power):
+        self.__location = location
+        self.__animals_qty = animals_qty
+        self.__vent_power = vent_power
+        print('Farm has been created')
 
-pigfarm = Farm('Basiwka', 30, 50)
+    def __del__(self):
+        print('Farm has been deleted')
 
-print(pigfarm.location)
+    def get_location(self):
+        return self.__location
+    
+    def get_animals_qty(self):
+        return self.__animals_qty
+    
+    def get_vent_power(self): 
+        return self.__vent_power
