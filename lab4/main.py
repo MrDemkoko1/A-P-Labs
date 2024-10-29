@@ -25,6 +25,10 @@ class Farm:
     def get_amount_of_milk(self):
         return self.__amount_of_milk
 
+    def add_milk(self, additional_milk):
+        if additional_milk >= 0:
+            self.__amount_of_milk += additional_milk
+
     def efficiency(self):
         if self.__animals_qty > 0:
             return self.__amount_of_milk / self.__animals_qty
@@ -41,6 +45,10 @@ def main():
     farm1 = Farm('Lviv', 30, 300, 28)
     farm2 = Farm('Drogobych', 50, 350, 38)
     farm3 = Farm('Ternopil', 123, 430, 125)
+
+    farm1.add_milk(35)
+    farm2.add_milk(44)
+    farm3.add_milk(56)
 
     farms = [farm1, farm2, farm3]
 
