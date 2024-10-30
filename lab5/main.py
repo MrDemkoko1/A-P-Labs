@@ -40,13 +40,15 @@ class Weather:
         return self.__weather_type
 
     def __str__(self):
-        return f'Day: {self.__day}\nCity: {self.__city}\nCountry: {self.__country}\nTemperature: {self.__temp}\nHumidity: {self.__humidity}%\nWind speed: {self.__wind_speed} km/h\nType of weather: {self.__weather_type}'
+        return (f'Day: {self.__day}\nCity: {self.__city}\nCountry: {self.__country}\n'
+                f'Temperature: {self.__temp}\nHumidity: {self.__humidity}%\n'
+                f'Wind speed: {self.__wind_speed} km/h\nType of weather: {self.__weather_type.value}')
 
 class WeatherCalendar(Weather):
     pass
 
 def main():
-    weather_broadcast_1 = Weather('Monday', 'Lviv', 'Ukraine', 13, 60, 24, 'Cloudy')
+    weather_broadcast_1 = Weather('Monday', 'Lviv', 'Ukraine', 13, 60, 24, WeatherType.CLOUDY)
 
     print(weather_broadcast_1)
 
