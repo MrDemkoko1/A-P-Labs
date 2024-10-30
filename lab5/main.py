@@ -53,9 +53,23 @@ class WeatherCalendar():
     def get_records(self):
         return self.__records
 
-def print_broadcast(broadcast):
-    print('Weather broadcast is:')
-    for weather in broadcast.get_records():
+def find_max_temperature(weather_calendar):
+    temperatures = []
+    
+    for weather in weather_calendar:
+        temperatures.append(weather.get_temp)
+
+    biggest_temperature = 0
+
+    for temperature in temperatures:
+        if temperature > biggest_temperature:
+            biggest_temperature = temperature
+
+    return biggest_temperature
+
+def print_broadcast(weather_calendar):
+    print('Weather calendar:')
+    for weather in weather_calendar.get_records():
         print(f'\n{weather}')
 
 def main():
@@ -63,12 +77,14 @@ def main():
     weather2 = Weather("Monday", "Stanislaviv", "Ukraine", 15, 60, 10, WeatherType.SUNNY)
     weather3 = Weather("Tuesday", "Ternopil", "Ukraine", 10, 70, 15, WeatherType.CLOUDY)
 
-    broadcast1 = WeatherCalendar()
+    weather_calendar1 = WeatherCalendar()
 
-    broadcast1.add_weather(weather1)
-    broadcast1.add_weather(weather2)
-    broadcast1.add_weather(weather3)
+    weather_calendar1.add_weather(weather1)
+    weather_calendar1.add_weather(weather2)
+    weather_calendar1.add_weather(weather3)
 
-    print_broadcast(broadcast1)
+    print_broadcast(weather_calendar1)
+
+    print(find_max_temperature(weather_calendar1))
 
 main()
