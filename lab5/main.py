@@ -76,6 +76,12 @@ def print_weather_calendar(weather_calendar):
     for weather in weather_calendar.get_records():
         print(f'\n{weather}')
 
+def is_lviv_weather(humidity, weather_type):
+    if humidity > 80 and weather_type == WeatherType.RAINY:
+        print('The typical day in Lviv...')
+    else:
+        print('You\'re lucky man')
+
 def main():
     weather1 = Weather('Monday', 'Lviv', 'Ukraine', 13, 85, 24, WeatherType.RAINY)
     weather2 = Weather('Monday', 'Stanislaviv', 'Ukraine', 15, 60, 10, WeatherType.SUNNY)
@@ -89,5 +95,7 @@ def main():
 
     print_weather_calendar(weather_calendar1)
     find_max_temperature(weather_calendar1, 'Monday')
+    
+    is_lviv_weather(weather3.get_humidity(), weather3.get_weather_type())
 
 main()
