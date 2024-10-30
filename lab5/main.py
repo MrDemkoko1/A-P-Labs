@@ -1,5 +1,4 @@
 from enum import Enum
-from typing import List
 
 class WeatherType(Enum):
     SUNNY = 'Sunny'
@@ -41,15 +40,35 @@ class Weather:
 
     def __str__(self):
         return (f'Day: {self.__day}\nCity: {self.__city}\nCountry: {self.__country}\n'
-                f'Temperature: {self.__temp}\nHumidity: {self.__humidity}%\n'
+                f'Temperature: {self.__temp}°C\nHumidity: {self.__humidity}%\n'
                 f'Wind speed: {self.__wind_speed} km/h\nType of weather: {self.__weather_type.value}')
 
-class WeatherCalendar(Weather):
-    pass
+class WeatherCalendar():
+    def __init__(self):
+        self.__records = []
+
+    def add_weather(self, weather):
+        self.__records.append(weather)
+
+    def get_records(self):
+        return self.__records
+
+def print_broadcast(broadcast):
+    print('Weather broadcast is:')
+    for weather in broadcast.get_records():
+        print(f'\n{weather}')
 
 def main():
-    weather_broadcast_1 = Weather('Monday', 'Lviv', 'Ukraine', 13, 60, 24, WeatherType.CLOUDY)
+    weather1 = Weather("Monday", "Lviv", "Ukraine", 13, 85, 24, WeatherType.RAINY)
+    weather2 = Weather("Monday", "Stanislaviv", "Ukraine", 15, 60, 10, WeatherType.SUNNY)
+    weather3 = Weather("Tuesday", "Ternopil", "Ukraine", 10, 70, 15, WeatherType.CLOUDY)
 
-    print(weather_broadcast_1)
+    broadcast1 = WeatherCalendar()
+
+    broadcast1.add_weather(weather1)
+    broadcast1.add_weather(weather2)
+    broadcast1.add_weather(weather3)
+
+    print_broadcast(broadcast1)
 
 main()
