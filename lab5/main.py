@@ -53,29 +53,33 @@ class WeatherCalendar():
     def get_records(self):
         return self.__records
 
-def find_max_temperature(weather_calendar):
-    temperatures = []
-    
-    for weather in weather_calendar:
-        temperatures.append(weather.get_temp)
+def find_max_temperature(weather_calendar, day):
+    temps_for_specific_day = []
 
-    biggest_temperature = 0
+    for record in weather_calendar.get_records():
+        if record.get_day() == day:
+            temps_for_specific_day.append(record.get_temp())
 
-    for temperature in temperatures:
-        if temperature > biggest_temperature:
-            biggest_temperature = temperature
+    if not temps_for_specific_day:
+        print('Not enough data.')
+    else:
+        max_temp = 0
 
-    return biggest_temperature
+        for temp in temps_for_specific_day:
+            if temp > max_temp:
+                max_temp = temp
+        
+        print(f'\nThe maximum temperature on {day} is {max_temp}°C')
 
-def print_broadcast(weather_calendar):
+def print_weather_calendar(weather_calendar):
     print('Weather calendar:')
     for weather in weather_calendar.get_records():
         print(f'\n{weather}')
 
 def main():
-    weather1 = Weather("Monday", "Lviv", "Ukraine", 13, 85, 24, WeatherType.RAINY)
-    weather2 = Weather("Monday", "Stanislaviv", "Ukraine", 15, 60, 10, WeatherType.SUNNY)
-    weather3 = Weather("Tuesday", "Ternopil", "Ukraine", 10, 70, 15, WeatherType.CLOUDY)
+    weather1 = Weather('Monday', 'Lviv', 'Ukraine', 13, 85, 24, WeatherType.RAINY)
+    weather2 = Weather('Monday', 'Stanislaviv', 'Ukraine', 15, 60, 10, WeatherType.SUNNY)
+    weather3 = Weather('Tuesday', 'Ternopil', 'Ukraine', 10, 70, 15, WeatherType.CLOUDY)
 
     weather_calendar1 = WeatherCalendar()
 
@@ -83,8 +87,7 @@ def main():
     weather_calendar1.add_weather(weather2)
     weather_calendar1.add_weather(weather3)
 
-    print_broadcast(weather_calendar1)
-
-    print(find_max_temperature(weather_calendar1))
+    print_weather_calendar(weather_calendar1)
+    find_max_temperature(weather_calendar1, 'Monday')
 
 main()
