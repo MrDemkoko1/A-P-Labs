@@ -78,6 +78,17 @@ def find_max_temperature(weather_calendar, day):
         
         print(f'\nThe maximum temperature on {day} is {max_temp}°C')
 
+def sort_by_day(weathers):
+    days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    ordered_weathers = []
+
+    for day in days_of_week:
+        for weather in weathers:
+            if weather.get_day() == day:
+                ordered_weathers.append(weather)
+
+    return ordered_weathers
+
 def print_weather_calendar(weather_calendar):
     print('Weather calendar:')
     for weather in weather_calendar.get_records():
@@ -86,13 +97,25 @@ def print_weather_calendar(weather_calendar):
 def main():
     weather1 = Weather('Monday', 'Lviv', 'Ukraine', 13, 85, 24, WeatherType.RAINY)
     weather2 = Weather('Monday', 'Stanislaviv', 'Ukraine', 15, 60, 10, WeatherType.SUNNY)
-    weather3 = Weather('Tuesday', 'Ternopil', 'Ukraine', 10, 70, 15, WeatherType.CLOUDY)
+    weather3 = Weather('Tuesday', 'Ternopil', 'Ukraine', 10, 50, 15, WeatherType.CLOUDY)
+    weather4 = Weather('Saturday', 'Lviv', 'Ukraine', 10, 89, 27, WeatherType.RAINY)
+    weather5 = Weather('Sunday', 'Kyiv', 'Ukraine', 12, 64, 10, WeatherType.FOGGY)
+    weather6 = Weather('Saturday', 'Luhansk', 'Ukraine', 9, 79, 23, WeatherType.SNOWY)
+    weather7 = Weather('Tuesday', 'Ternopil', 'Ukraine', 11, 80, 18, WeatherType.RAINY)
+    weather8 = Weather('Wednesday', 'Sudzha', 'Ukraine', 8, 100, 15, WeatherType.RAINY)
+    weather9 = Weather('Thursday', 'Xarkiv', 'Ukraine', 9, 45, 15, WeatherType.SUNNY)
+    weather10 = Weather('Thursday', 'Peremyszl', 'Poland', 14, 80, 15, WeatherType.RAINY)
+    weather11 = Weather('Friday', 'Zhytomyr', 'Ukraine', 10, 58, 15, WeatherType.CLOUDY)
 
+    weathers = [weather1, weather2, weather3, weather4, weather5,
+                weather6, weather7, weather8, weather9, weather10, weather11]
+    
+    ordered_weathers = sort_by_day(weathers)
+    
     weather_calendar1 = WeatherCalendar()
 
-    weather_calendar1.add_weather(weather1)
-    weather_calendar1.add_weather(weather2)
-    weather_calendar1.add_weather(weather3)
+    for weather in ordered_weathers:
+        weather_calendar1.add_weather(weather)
 
     print_weather_calendar(weather_calendar1)
     find_max_temperature(weather_calendar1, 'Monday')
