@@ -8,12 +8,14 @@ class WeatherType(Enum):
     SNOWY = 'Snowy'
 
 class Weather:
-    def __init__(self, day, city, country, temp, humidity, wind_speed, weather_type):
+    def __init__(self, day, city, region, country, temp, humidity, pressure, wind_speed, weather_type):
         self.__day = day
         self.__city = city
+        self.__region = region 
         self.__country = country
         self.__temp = temp
         self.__humidity = humidity
+        self.__pressure = pressure
         self.__wind_speed = wind_speed
         self.__weather_type = weather_type
 
@@ -22,6 +24,9 @@ class Weather:
 
     def get_city(self):
         return self.__city
+    
+    def get_region(self):
+        return self.__region
 
     def get_country(self):
         return self.__country
@@ -31,12 +36,18 @@ class Weather:
 
     def get_humidity(self):
         return self.__humidity
+    
+    def get_pressure(self):
+        return self.__pressure
 
     def get_wind_speed(self):
         return self.__wind_speed
     
     def get_weather_type(self):
         return self.__weather_type
+    
+    def count_average_press_in_region(self):
+        pass
 
     def is_lviv_weather(self):
         if self.__humidity > 80 and self.__weather_type == WeatherType.RAINY:
