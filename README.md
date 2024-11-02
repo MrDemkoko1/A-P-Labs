@@ -7,3 +7,8 @@
 4. Define the function findMaxTemprature( Weather*, day) - find the maximum temperature from the list of weather records for a certain day, if such a day does not exist, then output: "Not enough data". 
 5. Add a method for predicting whether the weather record belongs to Lviv isLvivWeather(humidity, type): if humidity > 80% and type = “RAINY”, then output: “The typical day in Lviv”, otherwise: “You're lucky, man". 
 6. Sort weather records by day.
+7. Add pressure field
+8. Add region field 
+9. Group data of average pressure by region
+10. Wind direction
+11. Count Wind force coefficient
