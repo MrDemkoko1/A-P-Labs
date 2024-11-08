@@ -53,9 +53,11 @@ class Weather:
             return 'You\'re lucky, man...'
 
     def __str__(self):
-        return (f'Day: {self.__day}\nCity: {self.__city}\nCountry: {self.__country}\n'
+        return (f'Day: {self.__day}\nCity: {self.__city}\n'
+                f'Region: {self.__region}\nCountry: {self.__country}\n'
                 f'Temperature: {self.__temp}°C\nHumidity: {self.__humidity}%\n'
-                f'Wind speed: {self.__wind_speed} km/h\nType of weather: {self.__weather_type.value}\n'
+                f'Wind speed: {self.__wind_speed} km/h\nPressure: {self.__pressure} mmHg\n'
+                f'Type of weather: {self.__weather_type.value}\n'
                 f'{self.is_lviv_weather()}')
 
 class WeatherCalendar():
@@ -68,7 +70,7 @@ class WeatherCalendar():
     def get_records(self):
         return self.__records
 
-    def find_average_pressure_for_region(self, day):
+    def find_av_press_and_wind_dir(self, day):
         region_pressures = {}
 
         for record in self.__records:
@@ -85,7 +87,9 @@ class WeatherCalendar():
         for region, pressures in region_pressures.items():
             avg_pressures[region] = sum(pressures) / len(pressures)
         
-        return avg_pressures 
+        wind_dir = f'Wind direction on {day}: From {max(avg_pressures)} region To {min(avg_pressures)} region'
+
+        print(wind_dir)
 
 def find_max_temperature(weather_calendar, day):
     temps_for_specific_day = []
@@ -123,20 +127,23 @@ def print_weather_calendar(weather_calendar):
 
 def main():
     weather1 = Weather('Monday', 'Lwiw', 'Lwiw', 'Ukraine', 13, 85, 24, 738, WeatherType.RAINY)
-    weather2 = Weather('Monday', 'Drohobycz', 'Lwiw', 'Ukraine', 15, 60, 10, 743, WeatherType.SUNNY)
+    weather2 = Weather('Monday', 'Terebowlia', 'Ternopil', 'Ukraine', 15, 60, 10, 743, WeatherType.SUNNY)
     weather3 = Weather('Tuesday', 'Stryj', 'Lwiw', 'Ukraine', 10, 50, 15, 729, WeatherType.CLOUDY)
     weather4 = Weather('Saturday', 'Basiwka', 'Lwiw', 'Ukraine', 10, 89, 27, 717, WeatherType.RAINY)
     weather5 = Weather('Sunday', 'Ternopil', 'Ternopil', 'Ukraine', 12, 64, 10, 770, WeatherType.FOGGY)
-    weather6 = Weather('Saturday', 'Strusiw', 'Ternopil', 'Ukraine', 9, 79, 23, 736, WeatherType.SNOWY)
-    weather7 = Weather('Tuesday', 'Terebowla', 'Ternopil', 'Ukraine', 11, 80, 18, 705, WeatherType.RAINY)
+    weather6 = Weather('Saturday', 'Kalusz', 'Stanisławiw', 'Ukraine', 9, 79, 23, 736, WeatherType.SNOWY)
+    weather7 = Weather('Tuesday', 'Ternopil', 'Ternopil', 'Ukraine', 11, 80, 18, 705, WeatherType.RAINY)
     weather8 = Weather('Wednesday', 'Czortkiw', 'Ternopil', 'Ukraine', 8, 100, 15, 777, WeatherType.RAINY)
     weather9 = Weather('Thursday', 'Stanisławiw', 'Stanisławiw', 'Ukraine', 9, 45, 15, 758, WeatherType.SUNNY)
-    weather10 = Weather('Thursday', 'Kołomyja', 'Stanisławiw', 'Poland', 14, 80, 15, 729, WeatherType.RAINY)
-    weather11 = Weather('Friday', 'Kalusz', 'Stanisławiw', 'Ukraine', 10, 58, 15, 756, WeatherType.CLOUDY)
-    weather12 = Weather('Friday', 'Jaremcze', 'Stanisławiw', 'Ukraine', 10, 58, 15, 718, WeatherType.CLOUDY)
+    weather10 = Weather('Thursday', 'Basiwka', 'Lwiw', 'Ukraine', 14, 80, 15, 729, WeatherType.RAINY)
+    weather11 = Weather('Sunday', 'Lucjk', 'Wołyń', 'Ukraine', 13, 85, 24, 738, WeatherType.RAINY)
+    weather12 = Weather('Friday', 'Strusiw', 'Stanisławiw', 'Ukraine', 10, 58, 15, 756, WeatherType.CLOUDY)
+    weather13 = Weather('Friday', 'Jaremcze', 'Stanisławiw', 'Ukraine', 10, 58, 15, 718, WeatherType.CLOUDY)
+    weather14 = Weather('Wednesday', 'Drohobycz', 'Lwiw', 'Ukraine', 13, 85, 24, 738, WeatherType.RAINY)
+
 
     weathers = [weather1, weather2, weather3, weather4, weather5,
-                weather6, weather7, weather8, weather9, weather10, weather11, weather12]
+                weather6, weather7, weather8, weather9, weather10, weather11, weather12, weather13, weather14]
     
     ordered_weathers = sort_by_day(weathers)
     
@@ -146,6 +153,9 @@ def main():
         weather_calendar1.add_weather(weather)
 
     print_weather_calendar(weather_calendar1)
+
     find_max_temperature(weather_calendar1, 'Monday')
-    
+
+    weather_calendar1.find_av_press_and_wind_dir('Sunday')
+
 main()
