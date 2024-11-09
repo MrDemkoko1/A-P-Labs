@@ -1,11 +1,13 @@
 from enum import Enum
 
+
 class WeatherType(Enum):
     SUNNY = 'Sunny'
     CLOUDY = 'Cloudy'
     RAINY = 'Rainy'
     FOGGY = 'Foggy'
     SNOWY = 'Snowy'
+
 
 class Weather:
     def __init__(self, day, city, region, country, temp, humidity, wind_speed, pressure, weather_type):
@@ -60,6 +62,7 @@ class Weather:
                 f'Type of weather: {self.__weather_type.value}\n'
                 f'{self.is_lviv_weather()}')
 
+
 class WeatherCalendar():
     def __init__(self):
         self.__records = []
@@ -70,6 +73,23 @@ class WeatherCalendar():
     def get_records(self):
         return self.__records
 
+    def find_max_temperature(self, day):
+        max_temp = None
+        city = None
+
+        for record in self.__records:
+            if record.get_day() == day:
+                temp = record.get_temp()
+
+                if max_temp is None or temp > max_temp:
+                    max_temp = temp
+                    city = record.get_city()
+        
+        if max_temp is None:
+            print('Not enough data.')
+        else:
+            print(f'\nThe maximum temperature on {day} is {max_temp}°C in {city}')
+            
     def find_av_press_and_wind_dir(self, day):
         region_pressures = {}
 
@@ -86,28 +106,25 @@ class WeatherCalendar():
 
         for region, pressures in region_pressures.items():
             avg_pressures[region] = sum(pressures) / len(pressures)
+
+        max_pressure = float('-inf')
+        max_pressure_region = None
+        min_pressure = float('inf')
+        min_pressure_region = None
+
+        for region, pressure in avg_pressures.items():
+            if pressure > max_pressure:
+                max_pressure = pressure
+                max_pressure_region = region
+            if pressure < min_pressure:
+                min_pressure = pressure
+                min_pressure_region = region
         
-        wind_dir = f'Wind direction on {day}: From {max(avg_pressures)} region To {min(avg_pressures)} region'
-
-        print(wind_dir)
-
-def find_max_temperature(weather_calendar, day):
-    temps_for_specific_day = []
-
-    for record in weather_calendar.get_records():
-        if record.get_day() == day:
-            temps_for_specific_day.append(record.get_temp())
-
-    if not temps_for_specific_day:
-        print('Not enough data.')
-    else:
-        max_temp = 0
-
-        for temp in temps_for_specific_day:
-            if temp > max_temp:
-                max_temp = temp
-        
-        print(f'\nThe maximum temperature on {day} is {max_temp}°C')
+        if len(avg_pressures) < 2:
+            print('Records for this day are from one region, wind direction can\'t be known')
+        else:
+            print(f'On {day} wind blows from {max_pressure_region} region to '
+                  f'{min_pressure_region} region with wind coef: {max_pressure - min_pressure}')
 
 def sort_by_day(weathers):
     days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -127,26 +144,25 @@ def print_weather_calendar(weather_calendar):
 
 def main():
     weather1 = Weather('Monday', 'Lwiw', 'Lwiw', 'Ukraine', 13, 85, 24, 738, WeatherType.RAINY)
-    weather2 = Weather('Monday', 'Terebowlia', 'Ternopil', 'Ukraine', 15, 60, 10, 743, WeatherType.SUNNY)
+    weather2 = Weather('Monday', 'Terebowla', 'Ternopil', 'Ukraine', 15, 60, 10, 743, WeatherType.SUNNY)
     weather3 = Weather('Tuesday', 'Stryj', 'Lwiw', 'Ukraine', 10, 50, 15, 729, WeatherType.CLOUDY)
     weather4 = Weather('Saturday', 'Basiwka', 'Lwiw', 'Ukraine', 10, 89, 27, 717, WeatherType.RAINY)
     weather5 = Weather('Sunday', 'Ternopil', 'Ternopil', 'Ukraine', 12, 64, 10, 770, WeatherType.FOGGY)
-    weather6 = Weather('Saturday', 'Kalusz', 'Stanisławiw', 'Ukraine', 9, 79, 23, 736, WeatherType.SNOWY)
+    weather6 = Weather('Saturday', 'Strusiw', 'Ternopil', 'Ukraine', 9, 79, 23, 736, WeatherType.SNOWY)
     weather7 = Weather('Tuesday', 'Ternopil', 'Ternopil', 'Ukraine', 11, 80, 18, 705, WeatherType.RAINY)
     weather8 = Weather('Wednesday', 'Czortkiw', 'Ternopil', 'Ukraine', 8, 100, 15, 777, WeatherType.RAINY)
     weather9 = Weather('Thursday', 'Stanisławiw', 'Stanisławiw', 'Ukraine', 9, 45, 15, 758, WeatherType.SUNNY)
     weather10 = Weather('Thursday', 'Basiwka', 'Lwiw', 'Ukraine', 14, 80, 15, 729, WeatherType.RAINY)
-    weather11 = Weather('Sunday', 'Lucjk', 'Wołyń', 'Ukraine', 13, 85, 24, 738, WeatherType.RAINY)
-    weather12 = Weather('Friday', 'Strusiw', 'Stanisławiw', 'Ukraine', 10, 58, 15, 756, WeatherType.CLOUDY)
+    weather11 = Weather('Sunday', 'Łućk', 'Wołyń', 'Ukraine', 13, 85, 24, 738, WeatherType.RAINY)
+    weather12 = Weather('Friday', 'Kalusz', 'Stanisławiw', 'Ukraine', 10, 58, 15, 756, WeatherType.CLOUDY)
     weather13 = Weather('Friday', 'Jaremcze', 'Stanisławiw', 'Ukraine', 10, 58, 15, 718, WeatherType.CLOUDY)
     weather14 = Weather('Wednesday', 'Drohobycz', 'Lwiw', 'Ukraine', 13, 85, 24, 738, WeatherType.RAINY)
 
-
     weathers = [weather1, weather2, weather3, weather4, weather5,
-                weather6, weather7, weather8, weather9, weather10, weather11, weather12, weather13, weather14]
+                weather6, weather7, weather8, weather9, weather10, 
+                weather11, weather12, weather13, weather14]
     
     ordered_weathers = sort_by_day(weathers)
-    
     weather_calendar1 = WeatherCalendar()
 
     for weather in ordered_weathers:
@@ -154,8 +170,7 @@ def main():
 
     print_weather_calendar(weather_calendar1)
 
-    find_max_temperature(weather_calendar1, 'Monday')
-
-    weather_calendar1.find_av_press_and_wind_dir('Sunday')
+    weather_calendar1.find_max_temperature('Monday')
+    weather_calendar1.find_av_press_and_wind_dir('Monday')
 
 main()
