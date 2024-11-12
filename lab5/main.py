@@ -105,7 +105,10 @@ class WeatherCalendar():
         avg_pressures = {}
 
         for region, pressures in region_pressures.items():
-            avg_pressures[region] = sum(pressures) / len(pressures)
+            sum_of_pressures = 0
+            for pressure in pressures:
+                sum_of_pressures += pressure
+            avg_pressures[region] = sum_of_pressures / len(pressures)
 
         max_pressure = float('-inf')
         max_pressure_region = None
