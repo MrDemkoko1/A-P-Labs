@@ -1,3 +1,4 @@
-# Laboratory works on "Algorithmisation and programming"
+# Laboratory work №6 (Variant 21)
 ---
-## Done by Skakun Demian (ІР(IoT)-14)
+### I.
+1. Sort the elements of the matrix columns in ascending order using the selection method.
